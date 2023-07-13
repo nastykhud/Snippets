@@ -14,8 +14,7 @@
 
         <div class="row">
             <div class="col">
-                <p>На данной страницы будут отображаться все созданные сниппеты.</p>
-                <p>Пока тут просто пример, но скоро заменим реальными сниппетами из БД!</p>
+                <p>На странице отображаются все созданные сниппеты.</p>
                 <hr>
             </div>
         </div>
@@ -36,7 +35,10 @@
                         <td scope="row">{{ snippet.id }}</td>
                         <td><a href="{% url 'snippet-detail' snippet.id %}"">{{ snippet.name }}</a>
                         <a href="{% url 'snippet-delete' snippet.id %}"">
-                            <i style = "color: red" class = "fa-sharp fa-solid fa-trash"></i></a></td>
+                            <i style = "color: red" class = "fa-sharp fa-solid fa-trash"></i></a>
+                        <a href="{% url 'snippet-edit' snippet.id %}"">
+                                <i style = "color: green" class = "fas fa-edit"></i></a>
+                        </td>
                         <td>{{ snippet.creation_date }}</td>
                     </tr>
                     {% endfor %}
