@@ -26,7 +26,6 @@ def add_snippet_page(request):
             if request.user.is_authenticated:
                 snippet.user = request.user #заполянем поле user
                 snippet.save() #сохраняем в базу
-            form.save()
             return redirect('snippets-list')
         return render(request, 'pages/add_snippet.html', {'form': form}) #на случай неверного заполнения формы
  
@@ -97,7 +96,11 @@ def login(request):
         if user is not None:
             auth.login(request, user)
         else:
-            pass
+            context ={
+                'pagename': 'PythonBin',
+                'errors': ["wrong data"]
+            }
+            return render(request, 'pages/index.html',context)
     return redirect('home')
 
 def logout(request):
