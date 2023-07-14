@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
-from MainApp.forms import SnippetForm
+from MainApp.forms import SnippetForm, UserRegistrationForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -117,3 +117,17 @@ def my_snippets_page(request):
          'snippets': snippets 
          }
     return render(request, 'pages/view_snippets.html', context)
+
+def create_user(request):
+    context = {'pagename': 'Регистрация пользователя'}
+    if request.method == "GET":
+        form = UserRegistrationForm()
+        context['form'] = form
+        return render(request, 'pages/registration.html', context)
+    if request.method == "POST":
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        context['form'] = form
+        return render(request, 'pages/registration.html', context)
