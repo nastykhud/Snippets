@@ -28,6 +28,7 @@
                         <th scope="col">Название</th>
                         <th scope="col">Дата создания</th>
                         <th scope="col">Пользователь</th>
+                        <th scope="col">Публичный</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,11 @@
                         </td>
                         <td>{{ snippet.creation_date }}</td>
                         <td> {{ snippet.user.username }}</td>
+                        {% if snippet.public %}
+                            <td style = "color: green"> Публичный </td>
+                        {% else %}
+                            <td style = "color: red"> Приватный </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
 
